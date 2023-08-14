@@ -12,7 +12,7 @@ def get_requirements(file_path):
 
 
 setup(
-    name = "Flight Price Prediction System",
+    name = "src",
     version = "0.0.1",
     author = "Shubhankar Chaturvedi",
     author_email = "shubhankar5848@gmail.com",

@@ -1,0 +1,62 @@
+<html>
+<body>
+
+
+<form action="{{url_for('predict_datapoint')}}" method="POST">
+    <div class="form-group">
+        <label for="Date_of_Journey">Date_of_Journey:</label>
+        <input type="text" id="Date_of_Journey" name="Date_of_Journey" placeholder="Enter Date_of_Journey (DD/MM/YYYY)">
+    </div>
+
+    <div class="form-group">
+      <label for="Total_Stops">Total_Stops:</label>
+      <select id="Total_Stops" name="Total_Stops">
+        <option value="non-stop">non-stop</option>
+        <option value="1 stop">1 stop</option>
+        <option value="2 stops">2 stops</option>
+        <option value="3 steps">3 steps</option>
+        <option value="4 stops">4 stops</option>
+      </select>
+    </div>
+
+    <div class="form-group">  
+        <label for="Duration">Duration:</label>
+        <input type="text" id="Duration" name="Duration" placeholder="Enter Duration of flight (19h 24m)">
+    </div>
+
+    <div class="form-group">  
+      <label for="Source">Source:</label>
+      <input type="text" id="Source" name="Source" placeholder="Enter Source of flight">
+    </div>
+
+    <div class="form-group">  
+      <label for="Destination">Destination:</label>
+      <input type="text" id="Destination" name="Destination" placeholder="Enter Destination of flight">
+    </div>
+
+    <div class="form-group">
+      <label for="Airline">Airline:</label>
+      <select id="Airline" name="Airline">
+        <option value="IndiGo">IndiGo</option>
+        <option value="Air India">Air India</option>
+        <option value="Jet Airways">Jet Airways</option>
+        <option value="SpiceJet">SpiceJet</option>
+        <option value="Multiple carriers">Multiple carriers</option>
+        <option value="GoAir">GoAir</option>
+        <option value="Vistara">Vistara</option>
+        <option value="Air Asia">Air Asia</option>
+        <option value="Vistara Premium economy">Vistara Premium economy</option>
+        <option value="Multiple carriers Premium economy">Multiple carriers Premium economy</option>
+        <option value="Trujet">Trujet</option>
+        <option value="Jet Airways Business">Jet Airways Business</option>
+      </select>
+    </div>
+
+
+<div style="clear:both;"></div>
+  <input type="submit" value="Submit">
+</form>
+
+The Fair will be: {{final_result}}
+</body>
+</html>

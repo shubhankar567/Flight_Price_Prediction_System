@@ -1,7 +1,9 @@
-import os, sys
+import os, sys #type:ignore
+import numpy as np
 from src.logger import logging
 from src.exceptions import CustomException
 import pickle #type:ignore
+from sklearn.metrics import mean_absolute_error
 
 def dump_pkl(pkl_path, pkl_obj):
     try:
@@ -13,7 +15,7 @@ def dump_pkl(pkl_path, pkl_obj):
             pickle.dump(pkl_obj, file_obj)
 
     except Exception as e:
-        logging.info(f'Error during dumping pickle file {pkl_obj}')
+        logging.info(f'Error during dumping pickle file {pkl_path}')
         raise CustomException(e, sys) 
     
 def load_pkl(pkl_path):
@@ -24,17 +26,27 @@ def load_pkl(pkl_path):
         return pickle_file
 
     except Exception as e:
-        logging.info(f'Error during dumping pickle file {pkl_obj}')
+        logging.info(f'Error during loading pickle file')
         raise CustomException(e, sys) 
-# Testing the utils
-if __name__ == '__main__':
-    try: 
-        file_path = os.path.join("artifacts", "bkl.pkl")
-        pkl = 1
-        dump_pkl(file_path, pkl)
-        file = load_pkl(file_path)
-        print(file)
-        
+    
+def model_evaluate(models, X_train, X_test, y_train, y_test):
+    try:
+        #Empty Dictionary for storing accuracy scores of various models
+        report = {}
+        y_train = y_train.values.ravel()
+        y_test = y_test.values.ravel()
+
+        logging.info('Training various models initiated.')
+        #Iterating over all the models
+        for model in models:
+            model_name = model
+            model_obj = models[model_name]
+            model_obj.fit(X_train, y_train)
+            y_predict = model_obj.predict(X_test)
+            mae = mean_absolute_error(y_test, y_predict)
+            report[model_name] = mae
+        return report
     except Exception as e:
-        logging.info("Error while testing confirmed")
+        logging.info('Error Occured during model evaluations!')
         raise CustomException(e, sys)
+
